@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Us | CampusEats</title>
+    <link rel="icon" href="./Images/Restaurants/download.png" type="image/icon type">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            outline: none;
+            border: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px;
+        }
+
+        body {
+            background-color: #f7f9fc;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        section {
+            padding: 60px 5%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Color Variables */
+        :root {
+            --primary-color: #4a90e2;
+            --primary-hover: #3a7dce;
+            --accent-color: #ff6b6b;
+            --text-color: #333333;
+            --light-text: #666666;
+            --border-color: #e0e0e0;
+            --bg-color: #ffffff;
+            --light-bg: #f7f9fc;
+            --input-bg: #ffffff;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            --border-radius: 8px;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        header .logo i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        header .navbar {
+            display: flex;
+            gap: 20px;
+        }
+
+        header .navbar a {
+            font-size: 1rem;
+            padding: 8px 15px;
+            color: var(--text-color);
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+        }
+
+        header .navbar a:hover,
+        header .navbar a.active {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        header .icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        header .icons i,
+        header .icons a {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        header .icons i:hover,
+        header .icons a:hover {
+            color: var(--primary-color);
+        }
+
+        #menu-bars {
+            display: none;
+        }
+
+        /* Search Form */
+        #search-form {
+            position: fixed;
+            top: -110%;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 1004;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 1rem;
+            transition: 0.4s ease-in-out;
+        }
+
+        #search-form.active {
+            top: 0;
+        }
+
+        #search-form #search-box {
+            width: 90%;
+            max-width: 600px;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            font-size: 18px;
+        }
+
+        #search-form label {
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+
+        #search-form #close1 {
+            position: absolute;
+            color: #fff;
+            cursor: pointer;
+            top: 30px;
+            right: 30px;
+            font-size: 30px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1498579150354-977475b7ea0b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 100px 20px;
+            margin-top: 70px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s 0.2s ease both;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s 0.4s ease both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: var(--border-radius);
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s 0.6s ease both;
+        }
+
+        .cta-button:hover {
+            background-color: #e45c5c;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* How it works Section */
+        .how-it-works {
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .how-it-works h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--text-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .how-it-works h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .step {
+            flex: 1 1 200px;
+            max-width: 250px;
+            padding: 30px 20px;
+            background-color: var(--light-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 30px;
+        }
+
+        .step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .step p {
+            color: var(--light-text);
+        }
+
+        /* Benefits Section */
+        .benefits {
+            background-color: var(--light-bg);
+            text-align: center;
+        }
+
+        .benefits h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--text-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .benefits h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .benefits-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .benefit {
+            flex: 1 1 200px;
+            max-width: 250px;
+            padding: 30px 20px;
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit:hover {
+            transform: translateY(-10px);
+        }
+
+        .benefit i {
+            font-size: 40px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .benefit h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .benefit p {
+            color: var(--light-text);
+        }
+
+        /* Sign Up Section */
+        .signup {
+            background-color: #fff;
+            padding: 80px 5%;
+        }
+
+        .signup-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .signup h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+
+        .signup h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .signup-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .form-option {
+            flex: 2;
+            background-color: var(--bg-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .qr-option {
+            flex: 1;
+            background-color: var(--bg-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-option h3, .qr-option h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .google-form-container {
+            width: 100%;
+            min-height: 600px;
+        }
+
+        .qr-container {
+            margin: 20px auto;
+            max-width: 300px;
+        }
+
+        .qr-code {
+            width: 100%;
+            height: auto;
+            max-width: 250px;
+            margin: 0 auto 15px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .qr-code:hover {
+            transform: scale(1.05);
+        }
+
+        .qr-caption {
+            font-size: 1rem;
+            color: var(--light-text);
+            margin-top: 15px;
+        }
+
+        .scan-instructions {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(74, 144, 226, 0.1);
+            border-radius: var(--border-radius);
+        }
+
+        .scan-instructions h4 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .scan-instructions ol {
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        .scan-instructions li {
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: #333;
+            color: #fff;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-about {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .footer-about h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-links h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-contact {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-contact h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            color: #fff;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #444;
+        }
+
+        /* Animation */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px;
+            }
+            
+            header .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #fff;
+                border-top: 1px solid #ddd;
+                padding: 10px;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: 0.5s ease-in-out;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            header .navbar.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            }
+            
+            #menu-bars {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+            
+            .signup-options {
+                flex-direction: column;
+            }
+            
+            .form-option, .qr-option {
+                flex: 1 1 100%;
+            }
+            
+            section {
+                padding: 40px 20px;
+            }
+            
+            .how-it-works h2, .benefits h2, .signup h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .how-it-works h2, .benefits h2, .signup h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <!--Header section start-->
+    <header>
+        <a href="./home.html" class="logo"><i class="fas fa-utensils"></i>CampusEats</a>
+        <nav class="navbar">
+            <a href="./home.html">Home</a>
+            <a href="./dishes.html">Dishes</a>
+            <a href="#" onclick="openAbout()">About</a>
+            <a href="./contact.html">Contact Us</a>
+            <a class="feed" id="feedback">Feedback</a>
+            <a href="#">Orders</a>
+            <a href="./cart.html">Cart</a>
+            <a class="active" href="./join_us.html">Join Us</a>
+        </nav>
+        <div class="icons">
+            <i class="fas fa-bars" id="menu-bars"></i>
+            <i class="fas fa-search" id="search-icon"></i>
+            <a href="#" class="fas fa-heart"></a>
+            <a href="#" class="fas fa-shopping-cart"></a>
+            <i class="fas fa-user" aria-hidden="true"></i>
+            <a href="login.html" class="fas fa-sign-in-alt"></a>
+        </div>
+    </header>
+    <!--Header section ends-->
+
+    <!--search form-->
+    <form action="" id="search-form">
+        <input type="search" placeholder="Search here..." name="" id="search-box">
+        <label for="search-box" class="fas fa-search"></label>
+        <i class="fas fa-times" id="close1"></i>
+    </form>
+    <!--Search Form ends-->
+
+    <!-- Hero section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Become a Delivery Partner</h1>
+            <h2>Earn Extra Cash While On Campus</h2>
+            <p>Join our network of student delivery partners and make money on your own schedule.</p>
+            <a href="#signup" class="cta-button">Sign Up Now</a>
+        </div>
+    </section>
+
+    <!-- How it works section -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3>1. Sign Up</h3>
+                    <p>Complete the registration form and verify your student ID.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>2. Set Your Schedule</h3>
+                    <p>Choose when you're available to deliver based on your class schedule.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>3. Accept Orders</h3>
+                    <p>Get notifications for nearby deliveries and accept the ones you want.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3>4. Earn Money</h3>
+                    <p>Get paid weekly directly to your preferred payment method.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits section -->
+    <section class="benefits">
+        <div class="container">
+            <h2>Why Join CampusEats?</h2>
+            <div class="benefits-container">
+                <div class="benefit">
+                    <i class="fas fa-clock"></i>
+                    <h3>Flexible Hours</h3>
+                    <p>Work when you want - before, between, or after classes.</p>
+                </div>
+                <div class="benefit">
+                    <i class="fas fa-wallet"></i>
+                    <h3>Quick Payments</h3>
+                    <p>Get paid weekly with no long waiting periods.</p>
+                </div>
+                <div class="benefit">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Campus Only</h3>
+                    <p>All deliveries are within campus boundaries for your convenience.</p>
+                </div>
+                <div class="benefit">
+                    <i class="fas fa-users"></i>
+                    <h3>Join a Community</h3>
+                    <p>Connect with other student partners and make new friends.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sign Up section -->
+    <section id="signup" class="signup">
+        <div class="signup-container">
+            <h2>Join Us Today</h2>
+            <div class="signup-options">
+                <div class="form-option">
+                    <h3>Register Online</h3>
+                    <div class="google-form-container">
+                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4LMz_I4yIMxJNItuzAL-RPVqbMaBfcp3e0s2fBOe48P1iZA/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                    </div>
+                </div>
+                <div class="qr-option">
+                    <h3>Scan & Register</h3>
+                    <div class="qr-container">
+                        <img src="/Food-Delivery-System/Files/Images/qr-code.png" alt="QR Code" class="qr-code">
+                        <p class="qr-caption">Scan this QR code with your phone to register on the go</p>
+                    </div>
+                    <div class="scan-instructions">
+                        <h4>How to scan:</h4>
+                        <ol>
+                            <li>Open your phone's camera app</li>
+                            <li>Point it at the QR code</li>
+                            <li>Tap the notification to open the form</li>
+                            <li>Complete the registration process</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>About CampusEats</h3>
+                <p>CampusEats is a student-focused food delivery service that connects hungry students with local campus eateries and student delivery partners.</p>
+                <p>Our mission is to make campus dining more convenient while creating flexible earning opportunities for students.</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="./home.html">Home</a></li>
+                    <li><a href="./dishes.html">Dishes</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> support@campuseats.com</p>
+                    <p><i class="fas fa-phone"></i> +91 7905355224</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Sharda University</p>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CampusEats. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- JavaScript for interactive elements -->
+    <script>
+        let menu = document.querySelector('#menu-bars');
+        let navbar = document.querySelector('.navbar');
+
+        menu.onclick = () => {
+            menu.classList.toggle('fa-times');
+            navbar.classList.toggle('active');
+        }
+
+        let searchIcon = document.querySelector('#search-icon');
+        let searchForm = document.querySelector('#search-form');
+        let closeIcon = document.querySelector('#close1');
+
+        searchIcon.onclick = () => {
+            searchForm.classList.toggle('active');
+        }
+
+        closeIcon.onclick = () => {
+            searchForm.classList.remove('active');
+        }
+
+        window.onscroll = () => {
+            menu.classList.remove('fa-times');
+            navbar.classList.remove('active');
+            
+            // Show/hide back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        }
+
+        function openAbout() {
+            alert("About page coming soon!");
+        }
+
+        document.querySelector('#feedback').addEventListener('click', function() {
+            alert("We appreciate your feedback! Feedback form coming soon.");
+        });
+    </script>
+</body>
+</html>

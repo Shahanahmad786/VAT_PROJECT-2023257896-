@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="icon" href="./Images/Restaurants/download.png" type="image/icon type">
+    <style>
+        .error {
+            color: red;
+            font-size: 0.8em;
+            margin-top: 5px;
+            display: none;
+        }
+        .password-strength-bar {
+            height: 5px;
+            width: 100%;
+            background-color: #e0e0e0;
+            margin-top: 5px;
+        }
+        .password-strength-bar div {
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        .password-tooltip {
+            font-size: 0.7em;
+            color: #666;
+            margin-top: 5px;
+        }
+        .developer-credits {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.7em;
+            color: #666;
+            text-align: right;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .developer-credits span {
+            display: block;
+            margin-bottom: 2px;
+        }
+        .developer-credits .supervisor {
+            font-style: italic;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="loginbg">
+            <div class="box signin">
+                <h2>Already Have an Account ?</h2>
+                <button class="signinbtn">Sign in</button>
+            </div>
+            <div class="box signup">
+                <h2>Dont Have an Account ?</h2>
+                <button class="signupbtn">Sign up</button>
+            </div>
+        </div>
+        <div class="formbx">
+            <div class="form signinform">
+                <form id="signinForm">
+                    <h2>CampusEats</h2>
+                    <h3>Sign In</h3>
+                    <input type="text" id="signinUsername" placeholder="Username" required>
+                    <input type="password" id="signinPassword" placeholder="Password" required>
+                    <div id="loginError" class="error"></div>
+                    <input type="button" value="Login" onclick="authenticateUser()">
+                    <a href="#" class="forgot">Forgot password?</a>
+                </form>
+            </div>
+            <div class="form signupform">
+                <form id="signupForm">
+                    <h3>Sign up</h3>
+                    <input type="text" id="signupName" placeholder="Enter Your Name" required>
+                    <input type="text" id="signupEmail" placeholder="Email" required>
+                    <input type="date" id="signupDOB" placeholder="Enter your Date of birth" required>
+                    <input type="password" id="signupPassword" placeholder="Password" required>
+                    <div class="password-strength-bar">
+                        <div id="passwordStrengthIndicator"></div>
+                    </div>
+                    <div id="passwordStrengthTooltip" class="password-tooltip"></div>
+                    <input type="password" id="signupConfirmPassword" placeholder="Confirm password" required>
+                    <div id="signupErrors" class="error"></div>
+                    <input type="button" value="Sign Up" onclick="registerUser()">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="developer-credits">
+        <span>Developed By:</span>
+        <span>Shahan Ahmad</span>
+        <span>Saami Abbas Khan</span>
+        <span class="supervisor">Supervised by Mr. Ashish Jain</span>
+    </div>
+
+    <script>
+        // Mock user database (would typically be on a server)
+        const users = [
+            { username: 'admin', password: 'SecurePass123!', name: 'Admin User' }
+        ];
+
+        // Password Strength Evaluation
+        function evaluatePasswordStrength(password) {
+            let strength = 0;
+            const strengthBar = document.getElementById('passwordStrengthIndicator');
+            const strengthTooltip = document.getElementById('passwordStrengthTooltip');
+
+            // Length check
+            if (password.length >= 8) strength++;
+            if (password.length >= 12) strength++;
+
+            // Complexity checks
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasNumbers = /[0-9]/.test(password);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+            if (hasUpperCase) strength++;
+            if (hasLowerCase) strength++;
+            if (hasNumbers) strength++;
+            if (hasSpecialChar) strength++;
+
+            // Update strength bar
+            strengthBar.style.backgroundColor = 
+                strength <= 2 ? 'red' : 
+                strength <= 4 ? 'orange' : 
+                strength <= 6 ? 'yellow' : 
+                'green';
+            strengthBar.style.width = `${(strength / 8) * 100}%`;
+
+            // Provide strength feedback
+            if (strength <= 2) {
+                strengthTooltip.textContent = 'Weak password. Add complexity.';
+                strengthTooltip.style.color = 'red';
+            } else if (strength <= 4) {
+                strengthTooltip.textContent = 'Moderate password. Can be improved.';
+                strengthTooltip.style.color = 'orange';
+            } else if (strength <= 6) {
+                strengthTooltip.textContent = 'Strong password. Almost there!';
+                strengthTooltip.style.color = 'green';
+            } else {
+                strengthTooltip.textContent = 'Excellent password!';
+                strengthTooltip.style.color = 'darkgreen';
+            }
+
+            return strength;
+        }
+
+        // Login Authentication
+        function authenticateUser() {
+            const username = document.getElementById('signinUsername').value;
+            const password = document.getElementById('signinPassword').value;
+            const loginError = document.getElementById('loginError');
+
+            // Reset previous error
+            loginError.style.display = 'none';
+            loginError.textContent = '';
+
+            // Find user
+            const user = users.find(u => u.username === username);
+
+            if (!user) {
+                loginError.textContent = 'Username not found. Please check and try again.';
+                loginError.style.display = 'block';
+                return;
+            }
+
+            // Check password
+            if (user.password !== password) {
+                loginError.textContent = 'Incorrect password. Please try again.';
+                loginError.style.display = 'block';
+                return;
+            }
+
+            // Successful login
+            alert(`Welcome back, ${user.name}!`);
+            window.location.href = 'home.html';
+        }
+
+        // User Registration
+        function registerUser() {
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const dob = document.getElementById('signupDOB').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+            const signupErrors = document.getElementById('signupErrors');
+
+            // Reset previous errors
+            signupErrors.style.display = 'none';
+            signupErrors.textContent = '';
+
+            // Validation checks
+            const passwordStrength = evaluatePasswordStrength(password);
+
+            // Comprehensive validation
+            if (passwordStrength <= 2) {
+                signupErrors.textContent = 'Password is too weak. Please create a stronger password.';
+                signupErrors.style.display = 'block';
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                signupErrors.textContent = 'Passwords do not match. Please confirm your password.';
+                signupErrors.style.display = 'block';
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                signupErrors.textContent = 'Please enter a valid email address.';
+                signupErrors.style.display = 'block';
+                return;
+            }
+
+            // Age verification (must be at least 16)
+            const today = new Date();
+            const birthDate = new Date(dob);
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            if (age < 16) {
+                signupErrors.textContent = 'You must be at least 16 years old to register.';
+                signupErrors.style.display = 'block';
+                return;
+            }
+
+            // If all validations pass
+            users.push({ username: email, password: password, name: name });
+            alert('Registration Successful! You can now log in.');
+
+            // Switch back to login form
+            document.querySelector('.signinbtn').click();
+        }
+
+        // Password Strength Real-time Evaluation
+        document.getElementById('signupPassword').addEventListener('input', function() {
+            evaluatePasswordStrength(this.value);
+        });
+
+        // Form Toggle Logic
+        const signinbtn = document.querySelector('.signinbtn');
+        const signupbtn = document.querySelector('.signupbtn');
+        const formbx = document.querySelector('.formbx');
+        const body = document.querySelector('body');
+
+        signupbtn.onclick = function(){
+            formbx.classList.add('active');
+            body.classList.add('active');
+        }
+
+        signinbtn.onclick = function(){
+            formbx.classList.remove('active');
+            body.classList.remove('active');
+        }
+        
+    </script>
+</body>
+</html>

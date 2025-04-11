@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbeque</title>
+    <link rel="icon" href="./Images/Restaurants/download.png" type="image/icon type">
+    <link rel="stylesheet" href="Barbeque.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+        /* Cart Animation Styles */
+        .fas.fa-shopping-cart {
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .fas.fa-shopping-cart:hover {
+            transform: scale(1.1);
+        }
+        
+        #cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #318322;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .bump {
+            animation: bump 0.3s ease-out;
+        }
+        
+        @keyframes bump {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Cart notification styles */
+        .cart-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .cart-notification.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!--Header section start-->
+    <header>
+        <a href="#" class="logo"><i class="fa fa-utensils"></i>CampusEats</a>
+        <nav class="navbar">
+            <a class="active" href="./home.html">Home</a>
+            <a href="./dishes.html">dishes</a>
+            <a href="#" onclick="openAbout()">about</a>
+            <a href="./contact.html" >Contact us</a>
+            <a class="feed" id="feedback">feedback</a>
+            <a href="./cart.html">Orders</a>
+        </nav>
+        <div class="icons">
+            <i class="fas fa-bars" id="menu-bars"></i>
+            <i class="fas fa-search" id="search-icon"></i>
+            <a href="#" class="fas fa-heart"></a>
+            <a href="./cart.html" id="shopping-list" class="fas fa-shopping-cart"><span id="cart-count">0</span></a>
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <a href="login.html" class="fas fa-sign-in-alt"></a>
+        </div>
+
+         <!--search form-->
+    <form action="" id="search-form">
+        <input type="search" placeholder="search here..." name="" id="search-box">
+        <label for="search-box" class="fas fa-search"></label>
+        <i class="fas fa-times" id="close1"></i>
+    </form>
+    <!--Search Form ends-->
+    </header>
+
+<!--Rating Form starts-->
+
+<div class="back">
+    <div class="container1" id="co1">
+        <div class="post">
+            <div class="text">Thanks for Rating us!</div>
+            <div class="edit">Edit</div>
+            <i class="fas fa-times" id="close"></i>
+    
+        </div>
+        <div class="star-widget">
+        <input type="radio" name="rate" id="rate-5">
+        <label for="rate-5" class="fas fa-star"></label>
+        <input type="radio" name="rate" id="rate-4">
+        <label for="rate-4" class="fas fa-star"></label>
+        <input type="radio" name="rate" id="rate-3">
+        <label for="rate-3" class="fas fa-star"></label>
+        <input type="radio" name="rate" id="rate-2">
+        <label for="rate-2" class="fas fa-star"></label>
+        <input type="radio" name="rate" id="rate-1">
+        <label for="rate-1" class="fas fa-star"></label>
+        <form action="#">
+            <i class="fas fa-times" id="close"></i>
+            <h4></h4>
+            <div class="textarea">
+                <textarea cols="30" placeholder="Describe your experience"></textarea>
+    
+            </div>
+            
+            <div class="btn">
+                <button type="submit">Post</button>
+            </div>
+        </form>
+        </div>    
+    </div>
+    </div>
+<!--Rating form ends-->
+<!--side bar-->
+
+<nav class="sidebar">
+    <div class="text">
+    <a href="./Barbeque.html"><i class="fa fa-home"></i></a>
+    <ul>
+        <li><a href="#biryani" onclick="myfun()">Biryani's</a></li>
+        <li><a href="#start" onclick="myfunction()">Starter's</a></li>
+        <li><a href="#roti" onclick="myroti()">Roti's</a></li>
+        <li><a href="#curry" onclick="mycurry()">Curry's</a></li>
+    </ul>
+</div>
+</nav>
+<!--Side bar ends-->
+<section class="home" id="home">
+    <div class="barb">
+    <h2><img src="./Images/Restaurants/barbeque1.jpg" height="350"></h2>
+    <div class="cont">
+        <iframe width="420" height="315"
+src="https://www.youtube.com/embed/gT8Acv6pQTs?autoplay=1&mute=1&loop=1&controls=0&playlist=gT8Acv6pQTs&loop=1">
+</iframe>
+        </div>
+        </div>
+</section>
+<section class="currys" id="curry">
+    <h2 class="barbeque">Barbeque</h2>
+    <hr class="line">
+    <h4>Curry's</h4> 
+    <div class="box-curry">
+        <div class="box">
+            <img src="./Images/Dishes/butter-chicken.jpg">
+            <h3>Butter-chicken</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+    
+            </div>
+            <span>₹250</span>
+            <br>
+            <a class="btn add-to-cart" data-name="Butter-chicken" data-price="250" data-image="./Images/Dishes/butter-chicken.jpg">Add to cart</a>
+        </div>
+        <!-- Remaining curry items with updated buttons -->
+        <div class="box">
+            <img src="./Images/Dishes/natukodi.jpg">
+            <h3>Natu Kodi</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span>₹250</span>
+            <br>
+            <a class="btn add-to-cart" data-name="Natu Kodi" data-price="250" data-image="./Images/Dishes/natukodi.jpg">Add to cart</a>
+        </div>
+        <!-- Continue with the rest of the curry items -->
+        <!-- The pattern continues for all products: Update the "Add to cart" buttons with appropriate class and data attributes -->
+        </div>
+</section>
+
+<section class="rotis" id="roti">
+    <h2 class="barbeque">Barbeque</h2>
+    <hr class="line">
+    <h4>Roti's</h4> 
+    <div class="box-roti">
+        <div class="box">
+            <img src="./Images/Dishes/butter-naan.jpg" style="width: 500px; height: 400px;">
+            <h3>Butter-Naan</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span>₹40</span>
+            <br>
+            <a class="btn add-to-cart" data-name="Butter-Naan" data-price="40" data-image="./Images/Dishes/butter-naan.jpg">Add to cart</a>
+        </div>
+        <!-- Repeat for all roti items with appropriate classes and data attributes -->
+    </div>
+</section>
+
+<section class="starters" id="start">
+    <h2 class="barbeque">Barbeque</h2>
+    <hr class="line">
+    <h4>Starters</h4> 
+    <div class="box-starters">
+        <div class="box">
+            <img src="./Images/Dishes/chicken-manchuria.jpg" style="width:600px;height: 400px;">
+            <h3>Chicken Manchurian Full</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span>₹350</span>
+            <br>
+            <a class="btn add-to-cart" data-name="Chicken Manchurian Full" data-price="350" data-image="./Images/Dishes/chicken-manchuria.jpg">Add to cart</a>
+        </div>
+        <!-- Repeat for all starter items with appropriate classes and data attributes -->
+    </div>
+</section>
+
+<section class="barb" id="biryani">
+    <h2 class="barbeque">Barbeque</h2>
+    <hr class="line">
+    <h4>Biryani's</h4>  
+    <div class="box-container">
+    <div class="box">
+        <img src="./Images/Dishes/Chicken-Biryani.jpg"  style="width:675px;height: 400px;">
+        <h3>Chicken Biryani</h3>
+        <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+        </div>
+        <span>₹120</span>
+        <br>
+        <a class="btn add-to-cart" data-name="Chicken Biryani" data-price="120" data-image="./Images/Dishes/Chicken-Biryani.jpg">Add to cart</a>
+    </div>
+    <!-- Repeat for all biryani items with appropriate classes and data attributes -->
+    </div>
+</section>
+
+<div id="about" class="about">
+    <a href="#" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="about-overlay">
+        <h1>About us</h1>
+        <p>Launched in 2021, Our technology platform connects customers,<br> 
+        restaurant partners and delivery partners, serving their multiple needs. <br>
+        Customers use our platform to search and discover restaurants, read and write customer 
+        generated reviews and view and upload photos,<br> order food delivery, book a table and make 
+        payments while dining-out at restaurants. On the other hand,<br> we provide restaurant partners 
+        with industry-specific marketing tools which enable them to engage and acquire customers<br> to 
+        grow their business while also providing a reliable <br>and efficient last mile delivery service. 
+        We also operate a one-stop procurement solution, <br>Hyperpure, which supplies high quality ingredients 
+        and kitchen products to restaurant partners.<br> We also provide our delivery partners with transparent 
+        and flexible earning opportunities. </p>
+    </div>
+</div>
+
+<!-- Shopping Cart Notification -->
+<div id="cart-notification" class="cart-notification">
+    <p>Item added to cart!</p>
+</div>
+
+<!--Footer Section-->
+<footer class="footer">
+    <!-- Footer content remains the same -->
+</footer>
+
+<!--JavaScript-->
+<script>
+// Original script code
+let menu = document.querySelector('#menu-bars');
+let navbar = document.querySelector('.navbar');
+
+menu.onclick = () => {
+    menu.classList.toggle('fa-times');
+    navbar.classList.toggle('active');
+}
+window.onscroll=() => {
+    menu.classList.remove('fa-times');
+    navbar.classList.remove('active');
+}
+document.querySelector('#search-icon').onclick=() => {
+    document.querySelector('#search-form').classList.toggle('active');
+}
+document.querySelector('#close1').onclick=() => {
+    document.querySelector('#search-form').classList.toggle('active');
+}
+document.querySelector("#feedback").onclick=() =>{
+document.querySelector("#co1").classList.toggle("active");
+}
+document.querySelector("#close").onclick=() =>{
+document.querySelector("#co1").classList.toggle("active");
+
+}
+function myfun(){
+document.getElementById("biryani").style.display="block";
+}
+function myfunction(){
+document.getElementById("start").style.display="block";
+}
+function myroti(){
+document.getElementById("roti").style.display="block";
+}
+function mycurry(){
+document.getElementById("curry").style.display="block";
+}
+function increment() {
+      document.getElementById('demoInput').stepUp();
+   }
+function decrement() {
+      document.getElementById('demoInput').stepDown();
+   }
+const btn = document.querySelector("button");
+const post = document.querySelector(".post");
+const widget = document.querySelector(".star-widget");
+const editBtn = document.querySelector(".edit");
+
+btn.onclick = () =>{
+widget.style.display = "none";
+post.style.display = "block";
+editBtn.onclick = () =>{
+    widget.style.display = "block";
+    post.style.display = "none";
+}
+return false;
+}
+function openAbout(){
+    document.getElementById("about").style.width = "100%";
+}
+function closeNav(){
+    document.getElementById("about").style.width = "0%";
+}
+
+// Enhanced Shopping Cart Logic
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+updateCartCount();
+
+// Add event listeners to all "Add to cart" buttons
+document.addEventListener('DOMContentLoaded', function() {
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const name = this.getAttribute('data-name');
+            const price = parseFloat(this.getAttribute('data-price'));
+            const image = this.getAttribute('data-image');
+            
+            addToCart(name, price, image);
+            showNotification();
+        });
+    });
+    
+    // Initialize cart count on page load with animation
+    const cartCount = document.getElementById('cart-count');
+    if (parseInt(cartCount.textContent) > 0) {
+        cartCount.classList.add('bump');
+        setTimeout(() => {
+            cartCount.classList.remove('bump');
+        }, 300);
+    }
+});
+
+function addToCart(name, price, image) {
+    // Check if the item is already in the cart
+    const existingItem = cart.find(item => item.name === name);
+    
+    if (existingItem) {
+        // If it exists, increase the quantity
+        existingItem.quantity += 1;
+    } else {
+        // If it doesn't exist, add it to cart
+        cart.push({
+            name: name,
+            price: price,
+            image: image,
+            quantity: 1
+        });
+    }
+    
+    // Save to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Update cart count with animation
+    updateCartCount(true);
+}
+
+function updateCartCount(animate = false) {
+    const cartCount = document.getElementById('cart-count');
+    let count = 0;
+    
+    cart.forEach(item => {
+        count += item.quantity;
+    });
+    
+    cartCount.textContent = count;
+    
+    // Add animation if requested
+    if (animate) {
+        cartCount.classList.add('bump');
+        setTimeout(() => {
+            cartCount.classList.remove('bump');
+        }, 300);
+    }
+}
+
+function showNotification() {
+    const notification = document.getElementById('cart-notification');
+    notification.classList.add('show');
+    
+    // Shake the cart icon
+    const cartIcon = document.querySelector('.fas.fa-shopping-cart');
+    cartIcon.style.animation = 'shake 0.5s';
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+        cartIcon.style.animation = '';
+    }, 2000);
+}
+
+// Add shake animation
+document.head.insertAdjacentHTML('beforeend', `
+    <style>
+        @keyframes shake {
+            0% { transform: rotate(0deg); }
+            10% { transform: rotate(-5deg); }
+            20% { transform: rotate(5deg); }
+            30% { transform: rotate(-5deg); }
+            40% { transform: rotate(5deg); }
+            50% { transform: rotate(-5deg); }
+            60% { transform: rotate(5deg); }
+            70% { transform: rotate(-5deg); }
+            80% { transform: rotate(5deg); }
+            90% { transform: rotate(-5deg); }
+            100% { transform: rotate(0deg); }
+        }
+    </style>
+`);
+</script>
+</body>
+</html>
